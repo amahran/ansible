@@ -1,0 +1,14 @@
+- name: Github personal email
+  git_config:
+    name: user.email
+    scope: global
+    value: "amahran@users.noreply.github.com"
+  tags:
+    - github-personal
+- name: Github personal name
+  git_config:
+    name: user.name
+    scope: global
+    value: "amahran"
+  tags:
+    - github-personal

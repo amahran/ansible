@@ -5,6 +5,6 @@
     apt:
       update_cache: true
     tags:
-    - zsh
-  tasks:
-  - include: tasks/zsh.yml
+      - zsh
+  - include_tasks: tasks/zsh.yml
+  - include_tasks: tasks/dotfiles.yml

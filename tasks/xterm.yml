@@ -1,0 +1,13 @@
+- name: Get xterm theme
+  ansible.builtin.git:
+    repo: 'https://github.com/rose-pine/gnome-terminal.git'
+    dest: "{{ lookup('env', 'HOME') }}/.config/xterm/themes"
+    update: yes
+    accept_hostkey: yes
+    version: main
+  tags:
+    - xterm
+- name: Set xterm theme
+  shell: dconf load /org/gnome/terminal/legacy/profiles:/ < $HOME/.config/xterm/themes/dist/rose-pine.dconf
+  tags:
+    - xterm

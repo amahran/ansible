@@ -1,0 +1,13 @@
+- name: Install System Packages 1 (build-essential)
+  become: true
+  apt:
+    name: ["build-essential"]
+  tags:
+    - core
+
+- name: Install System Packages 2 (the rest)
+  become: true
+  apt:
+    name: [ "curl" ]
+  tags:
+    - core

@@ -1,0 +1,26 @@
+- name: alacritty ppa
+  become: true
+  apt_repository:
+   repo: ppa:aslatter/ppa
+   state: present
+   update_cache: true
+  tags:
+    - alacritty
+- name: Install alacritty
+  become: true
+  apt:
+    name=alacritty
+  tags:
+    - alacritty
+- name: Install alacritty themes
+  file:
+    path: $HOME/.config/alacritty/themes
+    state: directory
+  ansible.builtin.git:
+    repo: 'https://github.com/alacritty/alacritty-theme'
+    dest: "{{ lookup('env', 'HOME') }}/.config/alacritty/themes"
+    update: yes
+    accept_hostkey: yes
+    version: master
+  tags:
+    - alacritty

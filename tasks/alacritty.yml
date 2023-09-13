@@ -16,6 +16,7 @@
   file:
     path: $HOME/.config/alacritty/themes
     state: directory
+- name: Install alacritty themes
   ansible.builtin.git:
     repo: 'https://github.com/alacritty/alacritty-theme'
     dest: "{{ lookup('env', 'HOME') }}/.config/alacritty/themes"
@@ -24,3 +25,4 @@
     version: master
   tags:
     - alacritty
+

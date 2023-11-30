@@ -1,6 +1,6 @@
 - name: Install packages (Productivity tools)
   become: true
   apt:
-    name: [ "tmux", "i3" ]
+    name: [ "tmux", "i3", "fzf"]
   tags:
     - productivity

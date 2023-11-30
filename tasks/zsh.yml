@@ -15,7 +15,7 @@
 - name: Install zsh plugin autosuggestions
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest:  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags:
     - zsh
 - name: remove zshrc

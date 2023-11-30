@@ -8,6 +8,6 @@
 - name: Install System Packages 2 (the rest)
   become: true
   apt:
-    name: [ "curl" ]
+    name: [ "curl", "git" ]
   tags:
     - core

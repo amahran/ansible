@@ -4,3 +4,8 @@
     name: [ "neofetch", "feh", "pavucontrol" ]
   tags:
     - utils
+- name: Utils - Configure system
+  become: true
+  command: "gsettings set org.gnome.desktop.sound event-sounds false"
+  tags:
+    - utils

@@ -1,0 +1,6 @@
+- name: Utils - Install packages
+  become: true
+  apt:
+    name: [ "neofetch", "feh", "pavucontrol" ]
+  tags:
+    - utils

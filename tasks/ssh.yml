@@ -1,6 +1,6 @@
 - name: Ensure .ssh directory exists.
   file:
-    dest: "{{ dest_key | dirname }}"
+    dest: "{{ lookup('env', 'HOME') }}/.ssh/"
     mode: 0700
     state: directory
   tags:
@@ -20,6 +20,6 @@
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
-    key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
+    key: "{{ lookup('env', 'HOME') }}/.ssh/personal_github.pub"
   with_fileglob:
   - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"

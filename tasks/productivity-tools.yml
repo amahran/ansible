@@ -4,8 +4,8 @@
     name: [ "tmux", "i3", "fzf", "tldr" ]
   tags:
     - productivity
-- name: Configure packages (Productivity tools)
-  become: true
-  command: "tldr --update"
-  tags:
-    - productivity
+#- name: Configure packages (Productivity tools)
+#  become: true
+#  command: "tldr --update"
+#  tags:
+#    - productivity

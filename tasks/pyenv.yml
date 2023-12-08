@@ -30,6 +30,18 @@
   tags:
     - pyenv
 
+- name: Pyenv - Add to the shell profile for Bash
+  become: true
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: |
+      # Pyenv
+      export PATH="$HOME/.pyenv/bin:$PATH"
+      eval "$(pyenv init --path)"
+  become_user: "{{ ansible_env.USER }}"
+  tags:
+    - pyenv
+
 - name: Pyenv - Add to the shell profile for Zsh
   become: true
   lineinfile:
@@ -38,7 +50,15 @@
       # Pyenv
       export PATH="$HOME/.pyenv/bin:$PATH"
       eval "$(pyenv init --path)"
-      eval "$(pyenv virtualenv-init -)"
+  become_user: "{{ ansible_env.USER }}"
+  tags:
+    - pyenv
+
+- name: Pyenv - Initialize in the shell for Bash
+  become: true
+  shell: |
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init --path)"
   become_user: "{{ ansible_env.USER }}"
   tags:
     - pyenv
@@ -46,8 +66,8 @@
 - name: Pyenv - Initialize in the shell for Zsh
   become: true
   shell: |
+    source "{{ ansible_env.HOME }}/.zprofile"
     eval "$(pyenv init --path)"
-    eval "$(pyenv virtualenv-init -)"
   become_user: "{{ ansible_env.USER }}"
   tags:
     - pyenv

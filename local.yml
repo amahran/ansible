@@ -9,10 +9,9 @@
   - import_tasks: tasks/ssh.yml
   - import_tasks: tasks/core.yml
   - import_tasks: tasks/zsh.yml
-  - import_tasks: tasks/alacritty.yml
   - import_tasks: tasks/dotfiles.yml
   - import_tasks: tasks/productivity-tools.yml
-  - import_tasks: tasks/xterm.yml
   - import_tasks: tasks/vscode.yml
   - import_tasks: tasks/pyenv.yml
   - import_tasks: tasks/utils.yml
+  - import_tasks: tasks/xterm.yml

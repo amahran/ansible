@@ -1,7 +1,7 @@
 - name: Utils - Install packages
   become: true
   apt:
-    name: [ "neofetch", "feh", "pavucontrol" ]
+    name: [ "neofetch", "feh", "pavucontrol", "autorandr" ]
   tags:
     - utils
 - name: Utils - Configure system

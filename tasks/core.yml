@@ -1,7 +1,7 @@
 - name: Install System Packages 1 (build-essential)
   become: true
   apt:
-    name: ["build-essential"]
+    name: ["build-essential", "ripgrep"]
   tags:
     - core
 

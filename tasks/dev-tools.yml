@@ -1,0 +1,7 @@
+- name: Install dev tools
+  become: true
+  apt:
+    name: ["vim","neovim"]
+  tags:
+    - dev-tools
+

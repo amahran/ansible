@@ -15,3 +15,4 @@
   - import_tasks: tasks/pyenv.yml
   - import_tasks: tasks/utils.yml
   - import_tasks: tasks/xterm.yml
+  - import_tasks: tasks/dev-tools.yml

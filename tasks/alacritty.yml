@@ -1,5 +1,4 @@
 - name: alacritty ppa
-  become: true
   apt_repository:
    repo: ppa:aslatter/ppa
    state: present
@@ -7,7 +6,6 @@
   tags:
     - alacritty
 - name: Install alacritty
-  become: true
   apt:
     name=alacritty
   tags:

@@ -1,18 +1,18 @@
 - hosts: localhost
+  become: true
   pre_tasks:
   - name: Update cache
-    become: true
     apt:
-      update_cache: true
+      update_cache: yes
+      upgrade: dist 
     tags:
-      - zsh
-  - import_tasks: tasks/ssh.yml
+      - always
   - import_tasks: tasks/core.yml
-  - import_tasks: tasks/zsh.yml
+  - import_tasks: tasks/ssh.yml
   - import_tasks: tasks/dotfiles.yml
-  - import_tasks: tasks/productivity-tools.yml
-  - import_tasks: tasks/vscode.yml
+  - import_tasks: tasks/zsh.yml
   - import_tasks: tasks/pyenv.yml
-  - import_tasks: tasks/utils.yml
-  - import_tasks: tasks/xterm.yml
-  - import_tasks: tasks/dev-tools.yml
+  - import_tasks: tasks/gnome.yml
+  - import_tasks: tasks/neovim.yml
+  - import_tasks: tasks/docker.yml
+  # - import_tasks: tasks/vscode.yml

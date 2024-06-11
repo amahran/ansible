@@ -1,0 +1,8 @@
+- name: Neovim
+  apt:
+    name: ["vim","neovim"]
+  tags:
+    - neovim
+    - ubuntu
+    - wsl
+

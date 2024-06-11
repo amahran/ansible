@@ -1,0 +1,61 @@
+- name: Install packages to allow apt to use a repository over HTTPS
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+  tags:
+    - docker
+    - ubuntu
+    - wsl
+
+- name: Add Docker’s official GPG key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags:
+    - docker
+    - ubuntu
+    - wsl
+
+- name: Set up the Docker repository
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    state: present
+  tags:
+    - docker
+    - ubuntu
+    - wsl
+
+- name: Install Docker Engine
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+  tags:
+    - docker
+    - ubuntu
+    - wsl
+
+- name: Ensure Docker service is running
+  service:
+    name: docker
+    state: started
+    enabled: yes
+  tags:
+    - docker
+    - ubuntu
+    - wsl
+
+- name: Add the current user to the Docker group
+  user:
+    name: "{{ lookup('env','USER') }}"
+    groups: docker
+    append: yes
+  tags:
+    - docker
+    - ubuntu
+    - wsl
+

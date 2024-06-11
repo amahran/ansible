@@ -1,13 +1,15 @@
-- name: Install System Packages 1 (build-essential)
-  become: true
+- name: Install packages
   apt:
-    name: ["build-essential", "ripgrep", "fd-find" ]
+    name: [ "build-essential", "ripgrep", "fd-find", "curl", "git", "tmux", "fzf", "tldr", "neofetch" ]
   tags:
     - core
+    - ubuntu
+    - wsl
+- name: Install utils
+  apt:
+    name: [ "libarchive-zip-perl" ] # for CRC32
+  tags:
+    - core
+    - ubuntu
+    - wsl
 
-- name: Install System Packages 2 (the rest)
-  become: true
-  apt:
-    name: [ "curl", "git" ]
-  tags:
-    - core

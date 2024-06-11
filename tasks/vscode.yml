@@ -1,13 +1,12 @@
 - name: Add Microsoft GPG key
-  become: true
   apt_key: # for packages authentication
     url: https://packages.microsoft.com/keys/microsoft.asc
     state: present
   tags:
     - vscode
+    - ubuntu
 
 - name: Add Visual Studio Code repository
-  become: true
   apt_repository:
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
@@ -16,11 +15,12 @@
     - community.general
   tags:
     - vscode
+    - ubuntu
     
 - name: Install Visual Studio Code
-  become: true
   apt:
     name: code
     state: present
   tags:
     - vscode
+    - ubuntu

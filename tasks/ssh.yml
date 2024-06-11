@@ -1,21 +1,25 @@
 - name: Ensure .ssh directory exists.
+  become: no
   file:
     dest: "{{ lookup('env', 'HOME') }}/.ssh/"
     mode: 0700
     state: directory
   tags:
     - dotfiles
-    - install
     - ssh
+    - ubuntu
+    - wsl
 - name: Install ssh key
+  become: no
   copy:
     src: .ssh/
     dest: "{{ lookup('env', 'HOME') }}/.ssh/"
     mode: 0600
   tags:
     - dotfiles
-    - install
     - ssh
+    - ubuntu
+    - wsl
 - name: Set authorized key taken from file
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
@@ -25,5 +29,15 @@
     - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
   tags:
     - dotfiles
-    - install
     - ssh
+    - ubuntu
+    - wsl
+- name: Debug - List .pub files
+  debug:
+    msg: "{{ lookup('fileglob', '/home/alaa/.ssh/*.pub', wantlist=True) }}"
+  tags:
+    - dotfiles
+    - ssh
+    - ubuntu
+    - wsl
+

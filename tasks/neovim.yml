@@ -1,8 +1,37 @@
-- name: Neovim
-  apt:
-    name: ["vim","neovim"]
+- name: Neovim - Install dependencies
+  become: true
+  apt: 
+    name:
+      - cmake
+      - npm # this is needed for installing some treesitter plugins
   tags:
     - neovim
     - ubuntu
     - wsl
-
+- name: Remove neovim
+  shell: rm -rf ~/neovim
+  tags:
+    - neovim
+    - ubuntu
+    - wsl
+- name: Clone Neovim
+  ansible.builtin.git:
+    repo: 'https://github.com/neovim/neovim.git'
+    dest: "{{ lookup('env', 'HOME') }}/neovim"
+  tags:
+    - neovim
+    - ubuntu
+    - wsl
+- name: Build neovim
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make -j 20"
+  tags:
+    - neovim
+    - ubuntu
+    - wsl
+- name: Install neovim
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
+  tags:
+    - neovim
+    - ubuntu
+    - wsl

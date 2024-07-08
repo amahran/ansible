@@ -1,4 +1,5 @@
 - name: Pyenv - Install dependencies
+  become: true
   apt:
     name:
       - make

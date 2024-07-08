@@ -1,5 +1,4 @@
 - name: Ensure .ssh directory exists.
-  become: no
   file:
     dest: "{{ lookup('env', 'HOME') }}/.ssh/"
     mode: 0700
@@ -10,7 +9,6 @@
     - ubuntu
     - wsl
 - name: Install ssh key
-  become: no
   copy:
     src: .ssh/
     dest: "{{ lookup('env', 'HOME') }}/.ssh/"

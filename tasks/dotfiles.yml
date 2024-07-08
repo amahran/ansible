@@ -1,4 +1,5 @@
 - name: Install stow
+  become: true
   apt: name=stow
   tags:
     - stow
@@ -7,19 +8,21 @@
     - wsl
 - name: Cloning dotfiles
   git:
-    repo: 'https://github.com/amahran/.dotfiles.git'
+    repo: 'git@github.com:amahran/.dotfiles.git'
     dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
     recursive: yes
     update: yes
     accept_hostkey: yes
     version: main
+  environment:
+    GIT_SSH_COMMAND: 'ssh -i {{ lookup('env', 'HOME') }}/.ssh/personal_github'
   tags:
     - stow
     - dotfiles
     - ubuntu
     - wsl
 - name: Stow dotfiles
-  shell: cd $HOME/.dotfiles && ./ubuntu
+  shell: cd {{ lookup('env', 'HOME') }}/.dotfiles && ./ubuntu
   tags:
     - stow
     - dotfiles

@@ -1,4 +1,5 @@
 - name: Install packages
+  become: true
   apt:
     name: [ "build-essential", "ripgrep", "fd-find", "curl", "git", "tmux", "fzf", "tldr", "neofetch" ]
   tags:
@@ -6,6 +7,7 @@
     - ubuntu
     - wsl
 - name: Install utils
+  become: true
   apt:
     name: [ "libarchive-zip-perl" ] # for CRC32
   tags:

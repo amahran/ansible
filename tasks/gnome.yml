@@ -1,4 +1,5 @@
 - name: i3 - install
+  become: true
   apt:
     name: [ "i3", "feh", "pavucontrol", "autorandr" ]
   tags:

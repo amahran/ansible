@@ -14,5 +14,6 @@
   - import_tasks: tasks/pyenv.yml
   - import_tasks: tasks/gnome.yml
   - import_tasks: tasks/neovim.yml
+  - import_tasks: tasks/zoom.yml
   - import_tasks: tasks/docker.yml
   # - import_tasks: tasks/vscode.yml

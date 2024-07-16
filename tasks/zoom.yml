@@ -1,0 +1,27 @@
+---
+- name: Download the latest Zoom package
+  get_url:
+    url: https://zoom.us/client/latest/zoom_amd64.deb
+    dest: /tmp/zoom_latest.deb
+  tags:
+    - zoom
+    - ubuntu
+
+- name: Install the downloaded Zoom package
+  become: yes
+  apt:
+    deb: /tmp/zoom_latest.deb
+    update_cache: yes
+    force: yes
+  tags:
+    - zoom
+    - ubuntu
+
+- name: Remove the downloaded package
+  file:
+    path: /tmp/zoom_latest.deb
+    state: absent
+  tags:
+    - zoom
+    - ubuntu
+

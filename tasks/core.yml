@@ -1,7 +1,7 @@
 - name: Install packages
   become: true
   apt:
-    name: [ "build-essential", "ripgrep", "fd-find", "curl", "git", "tmux", "fzf", "tldr", "neofetch" ]
+    name: [ "build-essential", "ripgrep", "fd-find", "curl", "git", "tmux", "fzf", "tldr", "neofetch", "picom" ]
   tags:
     - core
     - ubuntu

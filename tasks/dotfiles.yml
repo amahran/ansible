@@ -14,8 +14,9 @@
     update: yes
     accept_hostkey: yes
     version: main
+    force: yes
   environment:
-    GIT_SSH_COMMAND: 'ssh -i {{ lookup('env', 'HOME') }}/.ssh/personal_github'
+    GIT_SSH_COMMAND: "ssh -i {{ lookup('env', 'HOME') }}/.ssh/personal_github"
   tags:
     - stow
     - dotfiles

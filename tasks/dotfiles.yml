@@ -1,11 +1,20 @@
 - name: Install stow
   become: true
-  apt: name=stow
+  package: name=stow
   tags:
     - stow
     - dotfiles
-    - ubuntu
     - wsl
+- name: Ensure SSH client is installed on Arch Linux
+  become: true
+  pacman:
+    name: openssh
+    state: present
+  tags:
+    - stow
+    - dotfiles
+    - wsl
+  when: ansible_distribution == "Archlinux"
 - name: Cloning dotfiles
   git:
     repo: 'git@github.com:amahran/.dotfiles.git'
@@ -20,13 +29,11 @@
   tags:
     - stow
     - dotfiles
-    - ubuntu
     - wsl
 - name: Stow dotfiles
   shell: cd {{ lookup('env', 'HOME') }}/.dotfiles && ./ubuntu
   tags:
     - stow
     - dotfiles
-    - ubuntu
     - wsl
 

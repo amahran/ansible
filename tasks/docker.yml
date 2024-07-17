@@ -9,8 +9,8 @@
     state: present
   tags:
     - docker
-    - ubuntu
     - wsl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Add Docker’s official GPG key
   become: true
@@ -19,8 +19,8 @@
     state: present
   tags:
     - docker
-    - ubuntu
     - wsl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Set up the Docker repository
   become: true
@@ -29,8 +29,8 @@
     state: present
   tags:
     - docker
-    - ubuntu
     - wsl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Install Docker Engine
   become: true
@@ -40,26 +40,34 @@
     update_cache: yes
   tags:
     - docker
-    - ubuntu
     - wsl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: Install Docker
+  become: true
+  pacman: name=docker
+  tags:
+    - docker
+    - wsl
+  when: ansible_distribution in ["Archlinux"]
 
 - name: Ensure Docker service is running
+  become: true
   service:
     name: docker
     state: started
     enabled: yes
   tags:
     - docker
-    - ubuntu
     - wsl
 
 - name: Add the current user to the Docker group
+  become: true
   user:
     name: "{{ lookup('env','USER') }}"
     groups: docker
     append: yes
   tags:
     - docker
-    - ubuntu
     - wsl
 

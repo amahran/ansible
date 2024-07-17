@@ -1,27 +1,32 @@
 - name: i3 - install
   become: true
   apt:
-    name: [ "i3", "feh", "pavucontrol", "autorandr" ]
+    name=i3
   tags:
-    - gnome
-    - ubuntu
-- name: i3 - configure
+    - i3
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+- name: i3 - install utils
+  become: true
+  package:
+    name: [ "gnome-terminal", "feh", "pavucontrol", "autorandr" ]
+  tags:
+    - i3
+- name: gnome - configure
   command: "gsettings set org.gnome.desktop.sound event-sounds false"
   tags:
-    - gnome
-    - ubuntu
+    - i3
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 - name: Get xterm theme
-  ansible.builtin.git:
+  git:
     repo: 'https://github.com/rose-pine/gnome-terminal.git'
     dest: "{{ lookup('env', 'HOME') }}/.config/xterm/themes"
     update: yes
     accept_hostkey: yes
     version: main
   tags:
-    - gnome
-    - ubuntu
+    - i3
 - name: Set xterm theme
   shell: dconf load /org/gnome/terminal/legacy/profiles:/ < $HOME/.config/xterm/themes/dist/rose-pine.dconf
   tags:
-    - gnome
-    - ubuntu
+    - i3
+

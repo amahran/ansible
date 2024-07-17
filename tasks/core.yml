@@ -1,17 +1,25 @@
 - name: Install packages
   become: true
-  apt:
-    name: [ "build-essential", "ripgrep", "fd-find", "curl", "git", "tmux", "fzf", "tldr", "neofetch", "picom" ]
+  vars:
+    dev_base: "{{ 'build-essential' if ansible_distribution in ['Debian', 'Ubuntu'] else 'base-devel' }}"
+    fd: "{{ 'fd-find' if ansible_distribution in ['Debian', 'Ubuntu'] else 'fd' }}"
+    crc32: "{{ 'libarchive-zip-perl' if ansible_distribution in ['Debian', 'Ubuntu'] else 'perl-archive-zip' }}"
+  package:
+    name: 
+    - "ripgrep"
+    - "curl"
+    - "git"
+    - "tmux"
+    - "fzf"
+    - "tldr"
+    - "neofetch"
+    - "unzip"
+    - "picom"
+    - "{{ dev_base }}"
+    - "{{ fd }}"
+    - "{{ crc32 }}"
+    - wl-clipboard
   tags:
     - core
-    - ubuntu
-    - wsl
-- name: Install utils
-  become: true
-  apt:
-    name: [ "libarchive-zip-perl" ] # for CRC32
-  tags:
-    - core
-    - ubuntu
     - wsl
 

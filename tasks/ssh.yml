@@ -6,7 +6,6 @@
   tags:
     - dotfiles
     - ssh
-    - ubuntu
     - wsl
 - name: Install ssh key
   copy:
@@ -16,7 +15,6 @@
   tags:
     - dotfiles
     - ssh
-    - ubuntu
     - wsl
 - name: Set authorized key taken from file
   authorized_key:
@@ -28,7 +26,6 @@
   tags:
     - dotfiles
     - ssh
-    - ubuntu
     - wsl
 - name: Debug - List .pub files
   debug:
@@ -36,6 +33,5 @@
   tags:
     - dotfiles
     - ssh
-    - ubuntu
     - wsl
 

@@ -1,19 +1,39 @@
 - hosts: localhost
   pre_tasks:
-  - name: Update cache
-    become: true
-    apt:
-      update_cache: yes
-      upgrade: dist 
-    tags:
-      - always
-  - import_tasks: tasks/core.yml
-  - import_tasks: tasks/ssh.yml
-  - import_tasks: tasks/dotfiles.yml
-  - import_tasks: tasks/zsh.yml
-  - import_tasks: tasks/pyenv.yml
-  - import_tasks: tasks/gnome.yml
-  - import_tasks: tasks/neovim.yml
-  - import_tasks: tasks/zoom.yml
-  - import_tasks: tasks/docker.yml
-  # - import_tasks: tasks/vscode.yml
+    - name: Detect the OS family
+      setup:
+        gather_subset:
+          - "os_family"
+
+    - name: Update cache and upgrade packages on Debian-based systems
+      apt:
+        update_cache: yes
+        upgrade: dist
+      become: true
+      when: ansible_facts['os_family'] == "Debian"
+      tags:
+        - always
+
+    - name: Update cache and upgrade packages on Arch-based systems
+      pacman:
+        update_cache: yes
+        upgrade: yes
+      become: true
+      when: ansible_facts['os_family'] == "Archlinux"
+      tags:
+        - always
+
+  tasks:
+    - import_tasks: tasks/wsl.yml
+    - import_tasks: tasks/core.yml
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/zsh.yml
+    - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/pyenv.yml
+    - import_tasks: tasks/gnome.yml
+    - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/yay.yml
+    - import_tasks: tasks/zoom.yml
+    - import_tasks: tasks/docker.yml
+    # - import_tasks: tasks/vscode.yml
+

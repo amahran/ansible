@@ -5,7 +5,7 @@
     dest: /tmp/zoom_latest.deb
   tags:
     - zoom
-    - ubuntu
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Install the downloaded Zoom package
   become: yes
@@ -15,7 +15,7 @@
     force: yes
   tags:
     - zoom
-    - ubuntu
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Remove the downloaded package
   file:
@@ -23,5 +23,11 @@
     state: absent
   tags:
     - zoom
-    - ubuntu
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: Install zoom
+  command: yay -S --noconfirm zoom
+  tags:
+    - zoom
+  when: ansible_distribution in ["Archlinux"]
 

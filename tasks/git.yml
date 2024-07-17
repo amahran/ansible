@@ -5,6 +5,7 @@
     value: "amahran@users.noreply.github.com"
   tags:
     - github-personal
+    - wsl
 - name: Github personal name
   git_config:
     name: user.name
@@ -12,3 +13,4 @@
     value: "amahran"
   tags:
     - github-personal
+    - wsl

@@ -1,0 +1,9 @@
+- name: Ensure /etc/wsl.conf exists and configure
+  become: true
+  blockinfile:
+    path: /etc/wsl.conf
+    block: |
+      [interop]
+      appendWindowsPath = false
+  tags:
+    - wsl

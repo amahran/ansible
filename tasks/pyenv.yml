@@ -23,8 +23,8 @@
     state: present
   tags:
     - pyenv
-    - ubuntu
     - wsl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Pyenv - Clone repository
   git:
@@ -33,6 +33,14 @@
     version: master
   tags:
     - pyenv
-    - ubuntu
     - wsl
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: Install pyenv
+  become: true
+  pacman: name=pyenv
+  tags:
+    - pyenv
+    - wsl
+  when: ansible_distribution in ["Archlinux"]
 

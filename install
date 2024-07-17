@@ -1,11 +1,39 @@
 #!/usr/bin/env bash
 
-# Install ansible
-sudo apt update && sudo apt -y upgrade
-sudo apt install -y software-properties-common
-#sudo apt-add-repository --yes --update ppa:ansible/ansible
-sudo apt install -y ansible
-# Configure the new system
-ansible-playbook $HOME/ansible/local.yml --ask-become-pass --ask-vault-pass
+# Function to install Ansible on Debian-based systems
+install_ansible_debian() {
+  sudo apt update && sudo apt -y upgrade
+  sudo apt install -y software-properties-common
+  #sudo apt-add-repository --yes --update ppa:ansible/ansible
+  sudo apt install -y ansible
+}
 
+# Function to install Ansible on Arch-based systems
+install_ansible_arch() {
+  sudo pacman -Syu --noconfirm
+  sudo pacman -S --noconfirm ansible
+}
+
+# Determine the distribution and install Ansible
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  case "$ID" in
+    debian|ubuntu)
+      install_ansible_debian
+      ;;
+    arch|manjaro)
+      install_ansible_arch
+      ;;
+    *)
+      echo "Unsupported distribution: $ID"
+      exit 1
+      ;;
+  esac
+else
+  echo "/etc/os-release not found. Unable to determine the distribution."
+  exit 1
+fi
+
+# Configure the new system
+ansible-playbook $HOME/ansible/local.yml -t wsl --ask-become-pass --ask-vault-pass
 

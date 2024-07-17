@@ -1,16 +1,16 @@
 - name: Install zsh
   become: true
-  apt: name=zsh
+  package: name=zsh
   tags:
     - zsh
-    - ubuntu
     - wsl
 - name: Change shell
   become: true
-  shell: chsh -s $(which zsh)
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: /usr/bin/zsh
   tags:
     - zsh
-    - ubuntu
     - wsl
 - name: Remove existing .oh-my-zsh directory if it exists
   file:
@@ -18,13 +18,11 @@
     state: absent
   tags:
     - zsh
-    - ubuntu
     - wsl
 - name: Install ohmyzsh
   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
   tags:
     - zsh
-    - ubuntu
     - wsl
 - name: Install zsh plugin autosuggestions
   git:
@@ -32,14 +30,12 @@
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags:
     - zsh
-    - ubuntu
     - wsl
-- name: Configure zsh plugins
-  lineinfile:
+- name: Remove .zshrc
+  file:
     path: "{{ lookup('env', 'HOME') }}/.zshrc"
-    regexp: '^plugins='
-    line: plugins=(git zsh-autosuggestions pyenv fzf)
+    state: absent
   tags:
+    - test
     - zsh
-    - ubuntu
     - wsl

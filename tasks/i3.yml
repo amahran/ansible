@@ -5,6 +5,13 @@
   tags:
     - i3
   when: ansible_distribution in ["Debian", "Ubuntu"]
+- name: xss-lock install
+  become: true
+  package:
+    name=xss-lock
+  tags:
+    - i3
+  when: ansible_distribution in ["Archlinux"]
 - name: i3 - install utils
   become: true
   package:

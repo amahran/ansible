@@ -18,7 +18,13 @@
     - "{{ dev_base }}"
     - "{{ fd }}"
     - "{{ crc32 }}"
-    - wl-clipboard
+    - xclip # needed by neovim to clipboard copy when xserver is active
+    - "{{ 'wl-clipboard' if ansible_distribution == 'Archlinux' else '' }}" # wayland clipboard, in wsl is the only option for arch to copy to system clipboard
+    - "{{ 'tree' if ansible_distribution == 'Archlinux' else '' }}"
+    - "{{ 'man-db' if ansible_distribution == 'Archlinux' else '' }}"
+    - "{{ 'man-pages' if ansible_distribution == 'Archlinux' else '' }}"
+    - "{{ 'obsidian' if ansible_distribution == 'Archlinux' else '' }}"
+    - kitty
   tags:
     - core
     - wsl

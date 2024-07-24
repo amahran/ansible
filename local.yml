@@ -24,13 +24,13 @@
         - always
 
   tasks:
-    - import_tasks: tasks/wsl.yml
+    # - import_tasks: tasks/wsl.yml
     - import_tasks: tasks/core.yml
     - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/zsh.yml
     - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/pyenv.yml
-    - import_tasks: tasks/gnome.yml
+    - import_tasks: tasks/i3.yml
     - import_tasks: tasks/neovim.yml
     - import_tasks: tasks/yay.yml
     - import_tasks: tasks/zoom.yml

@@ -35,5 +35,5 @@ else
 fi
 
 # Configure the new system
-ansible-playbook $HOME/ansible/local.yml -t wsl --ask-become-pass --ask-vault-pass
+ansible-playbook $HOME/ansible/local.yml --ask-become-pass --ask-vault-pass
 

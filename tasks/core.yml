@@ -25,6 +25,7 @@
     - "{{ 'man-pages' if ansible_distribution == 'Archlinux' else '' }}"
     - "{{ 'obsidian' if ansible_distribution == 'Archlinux' else '' }}"
     - kitty
+    - bat
   tags:
     - core
     - wsl

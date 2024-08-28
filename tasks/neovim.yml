@@ -2,8 +2,24 @@
   become: true
   package: 
     name:
+      - base-devel
       - cmake
-      - npm # this is needed for installing some treesitter plugins
+      - unzip
+      - ninja
+      - curl
+      - tree-sitter-cli
+      # neovim plugins uses those
+      - npm
+      - luarocks
+      - ruby
+      # TODO: add this for debain
+      - "{{ 'python-neovim' if ansible_distribution == 'Archlinux' else '' }}"
+  tags:
+    - neovim
+    - wsl
+- name: Install npm neovim
+  become: true
+  shell: npm install neovim
   tags:
     - neovim
     - wsl
@@ -20,7 +36,7 @@
     - neovim
     - wsl
 - name: Build neovim
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make -j 20"
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make CMAKE_BUILD_TYPE=Release"
   tags:
     - neovim
     - wsl

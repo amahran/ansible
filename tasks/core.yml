@@ -9,7 +9,6 @@
     - "ripgrep"
     - "curl"
     - "git"
-    - "tmux"
     - "fzf"
     - "tldr"
     - "neofetch"

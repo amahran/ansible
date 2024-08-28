@@ -1,0 +1,13 @@
+- name: Install tmux
+  become: true
+  package: name=tmux
+  tags:
+    - tmux
+    - wsl
+- name: Configure Tmux
+  shell: |
+    tmux new-session -d -s plugin_install
+    tmux send-keys -t plugin_install "tmux source ~/.config/tmux/tmux.conf && ~/.tmux/plugins/tpm/bin/install_plugins && tmux kill-session -t plugin_install" C-m
+  tags:
+    - tmux
+    - wsl

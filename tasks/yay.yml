@@ -18,6 +18,7 @@
     - wsl
 
 - name: Clean up yay build directory
+  become: true
   file:
     path: /tmp/yay
     state: absent

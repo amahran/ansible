@@ -4,6 +4,14 @@
   tags:
     - tmux
     - wsl
+- name: Install TPM
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+    update: yes
+  tags:
+    - tmux
+    - wsl
 - name: Configure Tmux
   shell: |
     tmux new-session -d -s plugin_install

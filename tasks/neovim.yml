@@ -23,15 +23,11 @@
   tags:
     - neovim
     - wsl
-- name: Remove neovim
-  shell: rm -rf ~/neovim
-  tags:
-    - neovim
-    - wsl
 - name: Clone Neovim
   git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/neovim"
+    update: yes
   tags:
     - neovim
     - wsl

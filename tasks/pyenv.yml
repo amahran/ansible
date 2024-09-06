@@ -1,4 +1,4 @@
-- name: Pyenv - Install dependencies
+- name: Pyenv - Install dependencies - Debian
   become: true
   apt:
     name:
@@ -25,6 +25,15 @@
     - pyenv
     - wsl
   when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- name: Pyenv - Install dependencies - Arch
+  become: true
+  package: name=tk
+  tags:
+    - pyenv
+    - wsl
+  when: ansible_distribution in ["Archlinux"]
+
 
 - name: Pyenv - Clone repository
   git:

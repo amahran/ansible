@@ -27,11 +27,11 @@
     - dotfiles
     - ssh
     - wsl
-- name: Debug - List .pub files
-  debug:
-    msg: "{{ lookup('fileglob', '/home/alaa/.ssh/*.pub', wantlist=True) }}"
-  tags:
-    - dotfiles
-    - ssh
-    - wsl
+# - name: Debug - List .pub files
+#   debug:
+#     msg: "{{ lookup('fileglob', '/home/alaa/.ssh/*.pub', wantlist=True) }}"
+#   tags:
+#     - dotfiles
+#     - ssh
+#     - wsl
 

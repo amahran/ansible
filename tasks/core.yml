@@ -25,6 +25,8 @@
     - "{{ 'obsidian' if ansible_distribution == 'Archlinux' else '' }}"
     - kitty
     - bat
+    - "{{ 'otf-firamono-nerd' if ansible_distribution == 'Archlinux' else '' }}"
+    - "{{ 'noto-fonts' if ansible_distribution == 'Archlinux' else '' }}"
   tags:
     - core
     - wsl

@@ -23,11 +23,19 @@
   tags:
     - neovim
     - wsl
+- name: Remove neovim
+  become: true
+  file:
+    path: "{{ lookup('env', 'HOME') }}/neovim"
+    state: absent
+  tags:
+    - neovim
+    - wsl
 - name: Clone Neovim
   git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/neovim"
-    update: yes
+    version: master
   tags:
     - neovim
     - wsl

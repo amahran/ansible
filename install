@@ -12,6 +12,8 @@ install_ansible_debian() {
 install_ansible_arch() {
   sudo pacman -Syu --noconfirm
   sudo pacman -S --noconfirm ansible
+  # install AUR helper module
+  ansible-galaxy collection install kewlfft.aur
 }
 
 # Determine the distribution and install Ansible

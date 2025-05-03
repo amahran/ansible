@@ -36,5 +36,6 @@
     - import_tasks: tasks/zoom.yml
     - import_tasks: tasks/docker.yml
     - import_tasks: tasks/tmux.yml
+    - import_tasks: tasks/hyprland.yml
     # - import_tasks: tasks/vscode.yml
 

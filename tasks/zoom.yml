@@ -26,7 +26,10 @@
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - name: Install zoom
-  command: yay -S --noconfirm zoom
+  kewlfft.aur.aur:
+    name: zoom
+    use: yay
+    state: present
   tags:
     - zoom
   when: ansible_distribution in ["Archlinux"]

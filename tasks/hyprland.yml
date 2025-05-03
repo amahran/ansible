@@ -1,0 +1,26 @@
+- name: Install hyprland utils - 1
+  become: true
+  package:
+    name: 
+    - "waybar"
+    - "hyprlock"
+    - "swaync"
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - hyprland
+
+- name: Install AUR packages - 2
+  kewlfft.aur.aur:
+    name: hyprshot
+    use: yay
+    state: present
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - hyprland
+
+# - name: Install hyprland utils - 2
+#   command: yay -S --noconfirm hyprshot
+#   when: ansible_distribution in ["Archlinux"]
+#   tags:
+#     - hyprland
+#

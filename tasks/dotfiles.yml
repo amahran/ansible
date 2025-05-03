@@ -31,7 +31,7 @@
     - dotfiles
     - wsl
 - name: Stow dotfiles
-  shell: cd {{ lookup('env', 'HOME') }}/.dotfiles && ./ubuntu
+  shell: cd {{ lookup('env', 'HOME') }}/.dotfiles && ./install
   tags:
     - stow
     - dotfiles

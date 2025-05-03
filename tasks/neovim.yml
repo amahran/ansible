@@ -19,7 +19,7 @@
     - wsl
 - name: Install npm neovim
   become: true
-  shell: npm install neovim
+  shell: npm install -g neovim
   tags:
     - neovim
     - wsl

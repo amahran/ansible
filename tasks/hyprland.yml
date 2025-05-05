@@ -4,6 +4,8 @@
     name: 
     - "waybar"
     - "hyprlock"
+    - "hypridle"
+    - "hyprpaper"
     - "swaync"
   when: ansible_distribution in ["Archlinux"]
   tags:

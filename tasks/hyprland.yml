@@ -2,6 +2,7 @@
   become: true
   package:
     name: 
+    - "rofi-wayland"
     - "waybar"
     - "hyprlock"
     - "hypridle"

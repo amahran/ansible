@@ -13,6 +13,7 @@
     - zathura-pdf-mupdf
     - reflector
     - remmina
+    - speedtest-cli
     - libreoffice-fresh
   when: ansible_distribution in ["Archlinux"]
   tags:
@@ -20,7 +21,7 @@
     - wsl
 
 - name: Install AUR extra packages
-  command: paru -S --needed --noconfirm flameshot-git speedtest-rs-bin # srecord (not working with gcc 15)
+  command: paru -S --needed --noconfirm flameshot-git # srecord (not working with gcc 15)
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

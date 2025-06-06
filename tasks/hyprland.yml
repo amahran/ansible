@@ -10,6 +10,7 @@
     - "swaync"
     - "brightnessctl"
     - "pavucontrol"
+    - "kanshi"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - hyprland

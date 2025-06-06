@@ -1,29 +1,29 @@
-- name: Clone yay repository
+- name: Clone paru repository
   git:
-    repo: https://aur.archlinux.org/yay.git
-    dest: /tmp/yay
+    repo: https://aur.archlinux.org/paru.git
+    dest: /tmp/paru
     update: yes
   when: ansible_distribution in ["Archlinux"]
   tags:
-    - yay
+    - paru
     - wsl
 
-- name: Build and install yay
+- name: Build and install paru
   shell: makepkg -si --noconfirm
   args:
-    chdir: /tmp/yay
+    chdir: /tmp/paru
   when: ansible_distribution in ["Archlinux"]
   tags:
-    - yay
+    - paru
     - wsl
 
-- name: Clean up yay build directory
+- name: Clean up paru build directory
   become: true
   file:
-    path: /tmp/yay
+    path: /tmp/paru
     state: absent
   when: ansible_distribution in ["Archlinux"]
   tags:
-    - yay
+    - paru
     - wsl
 

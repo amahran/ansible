@@ -1,0 +1,22 @@
+- name: Install yazi
+  become: true
+  package:
+    name:
+    - yazi
+    - 7zip
+    - zoxide
+    - chafa
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - yazi
+    - wsl
+
+- name: Create symlink (vi -> nvim)
+  become: true
+  file:
+    src: "{{ lookup('pipe', 'which nvim') }}"
+    dest: /usr/local/bin/vi
+    state: link
+  tags:
+    - yazi
+    - wsl

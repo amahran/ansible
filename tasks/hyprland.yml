@@ -8,6 +8,8 @@
     - "hypridle"
     - "hyprpaper"
     - "swaync"
+    - "brightnessctl"
+    - "pavucontrol"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - hyprland

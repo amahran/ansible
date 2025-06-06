@@ -25,17 +25,20 @@
 
   tasks:
     # - import_tasks: tasks/wsl.yml
+    - import_tasks: tasks/paru.yml
     - import_tasks: tasks/core.yml
+    - import_tasks: tasks/extra.yml
     - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/zsh.yml
     - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/pyenv.yml
-    - import_tasks: tasks/i3.yml
+    # - import_tasks: tasks/i3.yml
     - import_tasks: tasks/neovim.yml
-    - import_tasks: tasks/yay.yml
     - import_tasks: tasks/zoom.yml
     - import_tasks: tasks/docker.yml
     - import_tasks: tasks/tmux.yml
     - import_tasks: tasks/hyprland.yml
+    - import_tasks: tasks/nordvpn.yml
+    - import_tasks: tasks/yazi.yml
     # - import_tasks: tasks/vscode.yml
 

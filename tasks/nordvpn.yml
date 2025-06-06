@@ -1,0 +1,34 @@
+- name: Install nordvpn
+  become: true
+  command: paru -S --needed --noconfirm nordvpn-bin
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - nordvpn
+
+- name: Ensure 'nordvpn' group exists
+  group:
+    name: nordvpn
+    state: present
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - nordvpn
+
+- name: Add user to 'nordvpn' group
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: nordvpn
+    append: yes
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - nordvpn
+
+- name: Enable and start 'nordvpnd' service
+  become: true
+  systemd:
+    name: nordvpnd
+    enabled: true
+    state: started
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - nordvpn

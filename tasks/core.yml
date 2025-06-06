@@ -1,4 +1,4 @@
-- name: Install packages
+- name: Install core packages
   become: true
   vars:
     dev_base: "{{ 'build-essential' if ansible_distribution in ['Debian', 'Ubuntu'] else 'base-devel' }}"
@@ -11,9 +11,7 @@
     - "git"
     - "fzf"
     - "tldr"
-    - "neofetch"
     - "unzip"
-    - "picom"
     - "{{ dev_base }}"
     - "{{ fd }}"
     - "{{ crc32 }}"
@@ -22,11 +20,9 @@
     - "{{ 'tree' if ansible_distribution == 'Archlinux' else '' }}"
     - "{{ 'man-db' if ansible_distribution == 'Archlinux' else '' }}"
     - "{{ 'man-pages' if ansible_distribution == 'Archlinux' else '' }}"
-    - "{{ 'obsidian' if ansible_distribution == 'Archlinux' else '' }}"
     - kitty
     - bat
-    - "{{ 'otf-firamono-nerd' if ansible_distribution == 'Archlinux' else '' }}"
-    - "{{ 'noto-fonts' if ansible_distribution == 'Archlinux' else '' }}"
+    - jq
   tags:
     - core
     - wsl

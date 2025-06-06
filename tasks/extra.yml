@@ -1,0 +1,55 @@
+- name: Install extra packages
+  become: true
+  package:
+    name: 
+    - "fastfetch"
+    - "picom"
+    - "obsidian"
+    - "otf-firamono-nerd"
+    - "noto-fonts"
+    - networkmanager-l2tp #vpn
+    - strongswan # vpn
+    - zathura
+    - zathura-pdf-mupdf
+    - reflector
+    - remmina
+    - libreoffice-fresh
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - extra
+    - wsl
+
+- name: Install AUR extra packages
+  command: paru -S --needed --noconfirm flameshot-git speedtest-rs-bin # srecord (not working with gcc 15)
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - extra
+    - wsl
+
+- name: Create custom reflector config
+  become: true
+  copy:
+    dest: /etc/xdg/reflector/reflector.conf
+    content: |
+      --country Germany
+      --age 12
+      --protocol https
+      --sort rate
+      --save /etc/pacman.d/mirrorlist
+    mode: '0644'
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - reflector
+    - wsl
+
+- name: Enable and start reflector.timer
+  become: true
+  systemd:
+    name: reflector.timer
+    enabled: true
+    state: started
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - reflector
+    - wsl
+

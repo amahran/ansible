@@ -6,7 +6,12 @@
     - "picom"
     - "obsidian"
     - "otf-firamono-nerd"
-    - "noto-fonts"
+    - ttf-jetbrains-mono-nerd
+    - noto-fonts
+    - noto-fonts-ar
+    - noto-fonts-cjk
+    - noto-fonts-extra
+    - ttf-dejavu
     - networkmanager-l2tp #vpn
     - strongswan # vpn
     - zathura

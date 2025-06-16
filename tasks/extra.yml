@@ -20,6 +20,9 @@
     - remmina
     - speedtest-cli
     - libreoffice-fresh
+    - bluez
+    - bluez-utils
+    - blueman
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

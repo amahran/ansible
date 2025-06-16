@@ -23,6 +23,8 @@
     - bluez
     - bluez-utils
     - blueman
+    - ocrmypdf
+    - tesseract-data-deu
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

@@ -9,16 +9,18 @@
     - "hyprpaper"
     - "swaync"
     - "brightnessctl"
-    - "pavucontrol"
     - "kanshi"
+    - "hyprpolkitagent"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - hyprland
 
-- name: Install AUR packages - 2
+- name: Install AUR packages
   kewlfft.aur.aur:
-    name: hyprshot
-    use: yay
+    name: 
+    - hyprshot
+    - pwvucontrol
+    use: paru
     state: present
   when: ansible_distribution in ["Archlinux"]
   tags:

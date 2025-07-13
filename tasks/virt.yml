@@ -1,0 +1,24 @@
+- name: Install Virtual Machine tools
+  become: true
+  package:
+    name: 
+    - "libvirt"
+    - "qemu"
+    - "virt-manager"
+    - "virt-viewer"
+    - "dnsmasq"
+    - "edk2-ovmf"
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - virt
+
+- name: Enable and start libvirtd.service
+  become: true
+  systemd:
+    name: libvirtd.service
+    enabled: true
+    state: started
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - virt
+

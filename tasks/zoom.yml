@@ -28,7 +28,7 @@
 - name: Install zoom
   kewlfft.aur.aur:
     name: zoom
-    use: yay
+    use: paru
     state: present
   tags:
     - zoom

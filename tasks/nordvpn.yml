@@ -1,5 +1,4 @@
 - name: Install nordvpn
-  become: true
   command: paru -S --needed --noconfirm nordvpn-bin
   when: ansible_distribution in ["Archlinux"]
   tags:

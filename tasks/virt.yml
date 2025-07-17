@@ -8,6 +8,7 @@
     - "virt-viewer"
     - "dnsmasq"
     - "edk2-ovmf"
+    - "dmidecode"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - virt
@@ -15,7 +16,7 @@
 - name: Enable and start libvirtd.service
   become: true
   systemd:
-    name: libvirtd.service
+    name: libvirtd
     enabled: true
     state: started
   when: ansible_distribution in ["Archlinux"]

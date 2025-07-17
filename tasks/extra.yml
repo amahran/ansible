@@ -1,39 +1,64 @@
-- name: Install extra packages
+- name: Install extra packages - 1
   become: true
   package:
     name: 
-    - "fastfetch"
-    - "picom"
-    - "obsidian"
-    - "otf-firamono-nerd"
+    - fastfetch
+    - picom
+    - reflector
+    - speedtest-cli
+    - erofs-utils
+    # Fonts
+    - otf-firamono-nerd
     - ttf-jetbrains-mono-nerd
     - noto-fonts
     - noto-fonts-cjk
     - noto-fonts-extra
     - ttf-dejavu
-    - networkmanager-l2tp #vpn
-    - strongswan # vpn
-    - zathura
-    - zathura-pdf-mupdf
-    - reflector
-    - remmina
-    - speedtest-cli
-    - libreoffice-fresh
-    - bluez
-    - bluez-utils
-    - blueman
-    - tesseract-data-deu
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra
     - wsl
 
-- name: Install AUR extra packages
-  command: paru -S --needed --noconfirm noto-fonts-ar flameshot-git ocrmypdf dosfstools # srecord (not working with gcc 15)
+- name: Install extra packages - 2
+  become: true
+  package:
+    name: 
+    - obsidian
+    - zathura
+    - zathura-pdf-mupdf
+    - remmina
+    - libreoffice-fresh
+    - tesseract-data-deu
+    - gnome-themes-extra
+    - fwupd
+    - geoclue
+    # VPN
+    - networkmanager-l2tp
+    - strongswan
+    # For ipu6 laptop webcam
+    - gst-plugin-libcamera
+    - libcamera
+    - pipewire-libcamera
+    # Blutooth
+    - bluez
+    - bluez-utils
+    - blueman
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - extra
+
+- name: Install AUR extra packages - 1
+  command: paru -S --needed --noconfirm noto-fonts-ar ocrmypdf dosfstools # srecord (not working with gcc 15)
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra
     - wsl
+
+- name: Install AUR extra packages - 2
+  command: paru -S --needed --noconfirm flameshot-git
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - extra
 
 - name: Create custom reflector config
   become: true
@@ -48,10 +73,11 @@
     mode: '0644'
   when: ansible_distribution in ["Archlinux"]
   tags:
+    - extra
     - reflector
     - wsl
 
-- name: Enable and start reflector.timer
+- name: Enable and start systemd services - 1
   become: true
   systemd:
     name: reflector.timer
@@ -59,6 +85,30 @@
     state: started
   when: ansible_distribution in ["Archlinux"]
   tags:
+    - extra
     - reflector
     - wsl
+
+- name: Enable and start systemd services - 2
+  become: true
+  systemd:
+    name: 
+    - bluetooth
+    - systemd-resolved
+    enabled: true
+    state: started
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - extra
+
+- name: Symlink /etc/resolv.conf to systemd's stub
+  become: true
+  file:
+    src: ../run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - extra
 

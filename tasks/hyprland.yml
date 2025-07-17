@@ -26,9 +26,14 @@
   tags:
     - hyprland
 
-# - name: Install hyprland utils - 2
-#   command: yay -S --noconfirm hyprshot
-#   when: ansible_distribution in ["Archlinux"]
-#   tags:
-#     - hyprland
-#
+- name: Enable and start polkit auth agent
+  systemd:
+    name: 
+    - hyprpolkitagent
+    enabled: true
+    state: started
+    user: true
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - hyprland
+

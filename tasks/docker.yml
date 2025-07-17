@@ -45,7 +45,10 @@
 
 - name: Install Docker
   become: true
-  pacman: name=docker
+  pacman: 
+    name:
+    - docker
+    - cni-plugins
   tags:
     - docker
     - wsl

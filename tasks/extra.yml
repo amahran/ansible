@@ -3,7 +3,6 @@
   package:
     name: 
     - fastfetch
-    - picom
     - reflector
     - speedtest-cli
     - erofs-utils

@@ -20,6 +20,7 @@
     name: 
     - hyprshot
     - pwvucontrol
+    - blueberry-wayland
     use: paru
     state: present
   when: ansible_distribution in ["Archlinux"]

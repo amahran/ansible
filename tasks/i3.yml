@@ -15,7 +15,7 @@
 - name: i3 - install utils
   become: true
   package:
-    name: [ "gnome-terminal", "feh", "pavucontrol", "autorandr" ]
+    name: [ "blueman", "picom", "gnome-terminal", "feh", "pavucontrol", "autorandr" ]
   tags:
     - i3
 - name: gnome - configure

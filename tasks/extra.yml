@@ -41,7 +41,6 @@
     # Blutooth
     - bluez
     - bluez-utils
-    - blueman
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

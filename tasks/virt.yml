@@ -14,9 +14,9 @@
   tags:
     - virt
 
-- name: Enable and start libvirtd.service
+- name: Enable and start libvirtd service
   become: true
-  systemd:
+  service:
     name: libvirtd
     enabled: true
     state: started

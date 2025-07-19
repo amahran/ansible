@@ -1,0 +1,131 @@
+- name: Install Security apps
+  become: true
+  package:
+    name: 
+    - ufw
+    - apparmor
+  tags:
+    - security
+
+- name: Limit incoming SSH to 22/tcp
+  become: true
+  community.general.ufw:
+    rule: limit
+    port: "22"
+    proto: tcp
+  tags:
+    - security
+
+- name: Allow HTTP 80/tcp
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+  tags:
+    - security
+
+- name: Allow HTTPS 443/tcp
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "443"
+    proto: tcp
+  tags:
+    - security
+
+- name: Set default policy – deny all incoming
+  become: true
+  community.general.ufw:
+    direction: incoming
+    default: deny
+  tags:
+    - security
+
+- name: Set default policy – allow all outgoing
+  become: true
+  community.general.ufw:
+    direction: outgoing
+    default: allow
+  tags:
+    - security
+
+- name: Enable UFW (and reload if already enabled)
+  become: true
+  community.general.ufw:
+    state: enabled
+  tags:
+    - security
+
+- name: Enable system services
+  become: true
+  vars:
+    services:
+      - ufw
+      - apparmor
+  service:
+    name: "{{ item }}" 
+    enabled: true
+    state: started
+  loop: "{{ services }}"
+  tags:
+    - security
+
+- name: Find all .conf files in /boot/loader/entries/
+  become: true
+  find:
+    paths: /boot/loader/entries/
+    patterns: "*.conf"
+    file_type: file
+  register: boot_entry_files
+  tags:
+    - security
+
+- name: Add kernel cmdline options
+  become: true
+  vars:
+    new_lines:
+      - "options lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
+      - "options quiet splash"
+      - "options lockdown=integrity"
+  lineinfile:
+    path: "{{ item.0.path }}"
+    line: "{{ item.1 }}"
+    insertafter: '^options'
+    create: no
+    state: present
+  loop: "{{ boot_entry_files.files | product(new_lines) | list }}"
+  loop_control:
+    label: "{{ item.0.path }} → {{ item.1 }}"
+  tags:
+    - security
+
+- name: Harden SSH configuration
+  become: true
+  vars:
+    sshd_config_path: /etc/ssh/sshd_config
+    ssh_hardening_options:
+      PermitRootLogin: "no"
+      PasswordAuthentication: "no"
+      MaxAuthTries: "3"
+      ChallengeResponseAuthentication: "no"
+  lineinfile:
+    path: "{{ sshd_config_path }}"
+    regexp: "^#?{{ item.key }}\\s+"
+    line: "{{ item.key }} {{ item.value }}"
+    backrefs: yes
+    state: present
+    create: no
+  loop: "{{ ssh_hardening_options | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+  tags:
+    - security
+
+- name: Restart sshd
+  become: true
+  service:
+    name: sshd
+    state: restarted
+  tags:
+    - security

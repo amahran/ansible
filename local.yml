@@ -41,5 +41,6 @@
     - import_tasks: tasks/nordvpn.yml
     - import_tasks: tasks/yazi.yml
     - import_tasks: tasks/virt.yml
+    - import_tasks: tasks/security.yml
     # - import_tasks: tasks/vscode.yml
 

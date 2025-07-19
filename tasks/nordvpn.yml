@@ -24,7 +24,7 @@
 
 - name: Enable and start 'nordvpnd' service
   become: true
-  systemd:
+  service:
     name: nordvpnd
     enabled: true
     state: started

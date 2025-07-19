@@ -75,9 +75,9 @@
     - reflector
     - wsl
 
-- name: Enable and start systemd services - 1
+- name: Enable and start system services - 1
   become: true
-  systemd:
+  service:
     name: reflector.timer
     enabled: true
     state: started
@@ -87,14 +87,17 @@
     - reflector
     - wsl
 
-- name: Enable and start systemd services - 2
+- name: Enable and start system services - 2
   become: true
-  systemd:
-    name: 
-    - bluetooth
-    - systemd-resolved
+  vars:
+    services:
+      - bluetooth
+      - systemd-resolved
+  service:
+    name: "{{ item }}"
     enabled: true
     state: started
+  loop: "{{ services }}"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

@@ -28,9 +28,8 @@
     - hyprland
 
 - name: Enable and start polkit auth agent
-  systemd:
-    name: 
-    - hyprpolkitagent
+  service:
+    name: hyprpolkitagent
     enabled: true
     state: started
     user: true

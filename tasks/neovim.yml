@@ -28,6 +28,7 @@
   file:
     path: "{{ lookup('env', 'HOME') }}/neovim"
     state: absent
+  when: ansible_distribution in ["Ubuntu"]
   tags:
     - neovim
     - wsl

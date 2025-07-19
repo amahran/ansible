@@ -87,7 +87,6 @@
     new_lines:
       - "options lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
       - "options quiet splash"
-      - "options lockdown=integrity"
   lineinfile:
     path: "{{ item.0.path }}"
     line: "{{ item.1 }}"

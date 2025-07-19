@@ -41,6 +41,7 @@
     # Blutooth
     - bluez
     - bluez-utils
+    - systemd-resolvconf
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

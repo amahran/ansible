@@ -9,7 +9,6 @@
     - "dnsmasq"
     - "edk2-ovmf"
     - "dmidecode"
-    - "ebtables"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - virt

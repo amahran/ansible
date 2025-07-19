@@ -12,6 +12,7 @@
       - npm
       - luarocks
       - ruby
+      - yarn
       # TODO: add this for debain
       - "{{ 'python-neovim' if ansible_distribution == 'Archlinux' else '' }}"
   tags:

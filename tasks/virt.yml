@@ -3,12 +3,13 @@
   package:
     name: 
     - "libvirt"
-    - "qemu"
+    - "qemu-full"
     - "virt-manager"
     - "virt-viewer"
     - "dnsmasq"
     - "edk2-ovmf"
     - "dmidecode"
+    - "ebtables"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - virt
@@ -23,3 +24,12 @@
   tags:
     - virt
 
+- name: Add user to libvirt group
+  become: true
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: libvirt
+    append: yes
+  when: ansible_distribution in ["Archlinux"]
+  tags:
+    - virt

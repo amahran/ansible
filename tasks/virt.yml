@@ -9,6 +9,7 @@
     - "dnsmasq"
     - "edk2-ovmf"
     - "dmidecode"
+    - "spice-vdagent"
   when: ansible_distribution in ["Archlinux"]
   tags:
     - virt

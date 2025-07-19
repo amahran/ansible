@@ -32,7 +32,7 @@
     name: hyprpolkitagent
     enabled: true
     state: started
-    user: true
+    scope: user
   when: ansible_distribution in ["Archlinux"]
   tags:
     - hyprland

@@ -108,7 +108,6 @@
       PermitRootLogin: "no"
       PasswordAuthentication: "no"
       MaxAuthTries: "3"
-      ChallengeResponseAuthentication: "no"
   lineinfile:
     path: "{{ sshd_config_path }}"
     regexp: "^#?{{ item.key }}\\s+"

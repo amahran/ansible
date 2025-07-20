@@ -36,6 +36,5 @@
     path: "{{ lookup('env', 'HOME') }}/.zshrc"
     state: absent
   tags:
-    - test
     - zsh
     - wsl

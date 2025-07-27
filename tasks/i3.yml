@@ -15,6 +15,6 @@
 - name: i3 - install utils
   become: true
   package:
-    name: [ "picom", "feh", "autorandr" ]
+    name: [ "dunst", "dex", "picom", "feh", "autorandr" ]
   tags:
     - i3

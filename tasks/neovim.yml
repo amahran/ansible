@@ -13,6 +13,8 @@
       - luarocks
       - ruby
       - yarn
+      - deno
+      - webkit2gtk
       # TODO: add this for debain
       - "{{ 'python-neovim' if ansible_distribution == 'Archlinux' else '' }}"
   tags:

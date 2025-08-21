@@ -42,6 +42,7 @@
     - bluez
     - bluez-utils
     - systemd-resolvconf
+    - zoxide
   when: ansible_distribution in ["Archlinux"]
   tags:
     - extra

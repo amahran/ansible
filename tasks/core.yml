@@ -1,9 +1,9 @@
 - name: Install core packages
   become: true
   vars:
-    dev_base: "{{ 'build-essential' if ansible_distribution in ['Debian', 'Ubuntu'] else 'base-devel' }}"
-    fd: "{{ 'fd-find' if ansible_distribution in ['Debian', 'Ubuntu'] else 'fd' }}"
-    crc32: "{{ 'libarchive-zip-perl' if ansible_distribution in ['Debian', 'Ubuntu'] else 'perl-archive-zip' }}"
+    dev_base: "{{ 'build-essential' if ansible_facts['distribution'] in ['Debian', 'Ubuntu'] else 'base-devel' }}"
+    fd: "{{ 'fd-find' if ansible_facts['distribution'] in ['Debian', 'Ubuntu'] else 'fd' }}"
+    crc32: "{{ 'libarchive-zip-perl' if ansible_facts['distribution'] in ['Debian', 'Ubuntu'] else 'perl-archive-zip' }}"
   package:
     name: 
     - "ripgrep"
@@ -16,10 +16,10 @@
     - "{{ fd }}"
     - "{{ crc32 }}"
     - xclip # needed by neovim to clipboard copy when xserver is active
-    - "{{ 'wl-clipboard' if ansible_distribution == 'Archlinux' else '' }}" # wayland clipboard, in wsl is the only option for arch to copy to system clipboard
-    - "{{ 'tree' if ansible_distribution == 'Archlinux' else '' }}"
-    - "{{ 'man-db' if ansible_distribution == 'Archlinux' else '' }}"
-    - "{{ 'man-pages' if ansible_distribution == 'Archlinux' else '' }}"
+    - "{{ 'wl-clipboard' if ansible_facts['distribution'] == 'Archlinux' else '' }}" # wayland clipboard, in wsl is the only option for arch to copy to system clipboard
+    - "{{ 'tree' if ansible_facts['distribution'] == 'Archlinux' else '' }}"
+    - "{{ 'man-db' if ansible_facts['distribution'] == 'Archlinux' else '' }}"
+    - "{{ 'man-pages' if ansible_facts['distribution'] == 'Archlinux' else '' }}"
     - kitty
     - bat
     - jq

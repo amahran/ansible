@@ -16,7 +16,7 @@
       - deno
       - webkit2gtk
       # TODO: add this for debain
-      - "{{ 'python-neovim' if ansible_distribution == 'Archlinux' else '' }}"
+      - "{{ 'python-neovim' if ansible_facts['distribution'] == 'Archlinux' else '' }}"
   tags:
     - neovim
     - wsl
@@ -31,7 +31,7 @@
   file:
     path: "{{ lookup('env', 'HOME') }}/neovim"
     state: absent
-  when: ansible_distribution in ["Ubuntu"]
+  when: ansible_facts['distribution'] in ["Ubuntu"]
   tags:
     - neovim
     - wsl
@@ -40,27 +40,27 @@
     repo: 'https://github.com/neovim/neovim.git'
     dest: "/tmp/neovim"
     version: master
-  when: ansible_distribution in ["Ubuntu"]
+  when: ansible_facts['distribution'] in ["Ubuntu"]
   tags:
     - neovim
     - wsl
 - name: Build neovim
   shell: "cd /tmp/neovim && make CMAKE_BUILD_TYPE=Release"
-  when: ansible_distribution in ["Ubuntu"]
+  when: ansible_facts['distribution'] in ["Ubuntu"]
   tags:
     - neovim
     - wsl
 - name: Install neovim
   become: true
   shell: "cd /tmp/neovim && make install"
-  when: ansible_distribution in ["Ubuntu"]
+  when: ansible_facts['distribution'] in ["Ubuntu"]
   tags:
     - neovim
     - wsl
 - name: Install neovim
   become: true
   package: name=neovim
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - neovim
     - wsl

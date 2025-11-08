@@ -3,26 +3,34 @@
     repo: https://aur.archlinux.org/paru.git
     dest: /tmp/paru
     update: yes
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - paru
     - wsl
 
-- name: Build and install paru
-  shell: makepkg -si --noconfirm
+- name: Build paru package
+  shell: |
+    makepkg -f --noconfirm
   args:
     chdir: /tmp/paru
-  when: ansible_distribution in ["Archlinux"]
-  tags:
-    - paru
-    - wsl
+  when: ansible_facts['distribution'] in ["Archlinux"]
+  tags: [paru, wsl]
+
+- name: Install built paru package
+  become: true
+  community.general.pacman:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ lookup('fileglob', '/tmp/paru/*.pkg.tar.zst', wantlist=True) }}"
+  when: ansible_facts['distribution'] in ["Archlinux"]
+  tags: [paru, wsl]
 
 - name: Clean up paru build directory
   become: true
   file:
     path: /tmp/paru
     state: absent
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - paru
     - wsl

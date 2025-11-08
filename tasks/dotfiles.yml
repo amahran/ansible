@@ -14,7 +14,7 @@
     - stow
     - dotfiles
     - wsl
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts['distribution'] in ["Archlinux"]
 - name: Cloning dotfiles
   git:
     repo: 'git@github.com:amahran/.dotfiles.git'

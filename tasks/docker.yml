@@ -10,7 +10,7 @@
   tags:
     - docker
     - wsl
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_facts['distribution'] in ["Debian", "Ubuntu"]
 
 - name: Add Docker’s official GPG key
   become: true
@@ -20,7 +20,7 @@
   tags:
     - docker
     - wsl
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_facts['distribution'] in ["Debian", "Ubuntu"]
 
 - name: Set up the Docker repository
   become: true
@@ -30,7 +30,7 @@
   tags:
     - docker
     - wsl
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_facts['distribution'] in ["Debian", "Ubuntu"]
 
 - name: Install Docker Engine
   become: true
@@ -41,7 +41,7 @@
   tags:
     - docker
     - wsl
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_facts['distribution'] in ["Debian", "Ubuntu"]
 
 - name: Install Docker
   become: true
@@ -52,7 +52,7 @@
   tags:
     - docker
     - wsl
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
 
 - name: Ensure Docker service is running
   become: true

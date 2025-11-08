@@ -11,7 +11,7 @@
     - "brightnessctl"
     - "kanshi"
     - "hyprpolkitagent"
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - hyprland
 
@@ -23,7 +23,7 @@
     - blueberry-wayland
     use: paru
     state: present
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - hyprland
 
@@ -33,7 +33,7 @@
     enabled: true
     state: started
     scope: user
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - hyprland
 

@@ -6,7 +6,7 @@
     - 7zip
     - zoxide
     - chafa
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - yazi
     - wsl

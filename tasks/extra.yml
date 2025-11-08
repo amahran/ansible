@@ -13,7 +13,7 @@
     - noto-fonts-cjk
     - noto-fonts-extra
     - ttf-dejavu
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
     - wsl
@@ -43,20 +43,31 @@
     - bluez-utils
     - systemd-resolvconf
     - zoxide
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
 
 - name: Install AUR extra packages - 1
-  command: paru -S --needed --noconfirm noto-fonts-ar ocrmypdf dosfstools # srecord (not working with gcc 15)
-  when: ansible_distribution in ["Archlinux"]
-  tags:
-    - extra
-    - wsl
+  kewlfft.aur.aur:
+    use: paru
+    name:
+      - noto-fonts-ar
+      - ocrmypdf
+      - srecord
+    state: present
+  when: ansible_facts['distribution'] in "Archlinux"
+  tags: [extra, wsl]
+
+# - name: Install AUR extra packages - 1
+#   command: paru -S --needed --noconfirm noto-fonts-ar ocrmypdf dosfstools # srecord (not working with gcc 15)
+#   when: ansible_facts['distribution'] in ["Archlinux"]
+#   tags:
+#     - extra
+#     - wsl
 
 - name: Install AUR extra packages - 2
   command: paru -S --needed --noconfirm flameshot-git
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
 
@@ -71,7 +82,7 @@
       --sort rate
       --save /etc/pacman.d/mirrorlist
     mode: '0644'
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
     - reflector
@@ -83,7 +94,7 @@
     name: reflector.timer
     enabled: true
     state: started
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
     - reflector
@@ -100,7 +111,7 @@
     enabled: true
     state: started
   loop: "{{ services }}"
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
 
@@ -111,7 +122,7 @@
     dest: /etc/resolv.conf
     state: link
     force: yes
-  when: ansible_distribution in ["Archlinux"]
+  when: ansible_facts['distribution'] in ["Archlinux"]
   tags:
     - extra
 

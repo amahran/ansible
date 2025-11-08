@@ -17,6 +17,7 @@
       - webkit2gtk
       # TODO: add this for debain
       - "{{ 'python-neovim' if ansible_facts['distribution'] == 'Archlinux' else '' }}"
+      - "{{ 'python-pip' if ansible_facts['distribution'] == 'Archlinux' else '' }}"
   tags:
     - neovim
     - wsl

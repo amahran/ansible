@@ -24,13 +24,6 @@
   tags:
     - zsh
     - wsl
-- name: Install zsh plugin autosuggestions
-  git:
-    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
-  tags:
-    - zsh
-    - wsl
 - name: Remove .zshrc
   file:
     path: "{{ lookup('env', 'HOME') }}/.zshrc"
